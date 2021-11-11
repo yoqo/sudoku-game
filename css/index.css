@@ -1,0 +1,2220 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.fadeIn {
+  animation: fadeIn 2s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+}
+
+.fadeOut {
+  animation: fadeOut 2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  background: #000;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, "microsoft-yahei", sans-serif;
+  user-select: none;
+}
+
+[class*=icono-] {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  font-style: normal;
+  color: currentColor;
+  text-align: left;
+  text-indent: -9999px;
+  direction: ltr;
+}
+[class*=icono-]::after, [class*=icono-]::before {
+  content: "";
+}
+
+.icono-sliders {
+  height: 30px;
+  width: 30px;
+  margin: 2px;
+}
+.icono-sliders::after, .icono-sliders::before {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+.icono-sliders::before {
+  width: 8px;
+  height: 7px;
+  border-radius: 2px;
+  top: 67%;
+  box-shadow: inset 0 0 0 32px, 10px -10px, -10px -14px;
+}
+.icono-sliders::after {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  box-shadow: inset 0 0 0 32px, 10px 0, -10px 0;
+}
+
+.icono-reset {
+  width: 26px;
+  height: 26px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+  margin: 4px;
+  border-left-color: transparent;
+}
+.icono-reset::before {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -7px;
+  bottom: 0;
+  border-width: 6px;
+  border-style: solid;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  transform: rotate(135deg);
+}
+
+.icono-power {
+  width: 22px;
+  height: 22px;
+  margin: 6px;
+  border: 2px solid;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+.icono-power::before {
+  position: absolute;
+  top: -15%;
+  left: 8px;
+  width: 2px;
+  height: 60%;
+  box-shadow: inset 0 0 0 32px;
+}
+
+.zIndexTop {
+  z-index: 10000;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show-flex {
+  display: flex !important;
+}
+
+.game-handler {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  height: 55px;
+}
+.game-handler .g-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: content-box;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 5px;
+  color: #666;
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  margin-right: 3vmin;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.2);
+}
+.game-handler .g-btn:hover {
+  transform: scale(1.05);
+}
+.game-handler .g-btn:active {
+  border-bottom-width: 0;
+}
+.game-handler .g-btn:last-child {
+  margin-right: 0;
+}
+.game-handler-rt {
+  right: 3vmin;
+  top: 3vmin;
+}
+.game-handler-rb {
+  right: 3vmin;
+  bottom: 3vmin;
+}
+
+#app {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  background-image: linear-gradient(to bottom, #ca6ece, #232361);
+  text-align: center;
+  z-index: 10;
+}
+#home .title {
+  position: relative;
+  height: 25vmin;
+  width: 100vw;
+}
+#home .title h1,
+#home .title h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#home .title h1 {
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 25vmin;
+  width: 100vmin;
+}
+#home .title h2 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 8vmin;
+}
+#home .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5vmin;
+}
+#home .buttons .start {
+  transition: all 0.2s ease-in-out;
+  box-sizing: content-box;
+  width: 50vmin;
+  height: 10vmin;
+  line-height: 10vmin;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1vmin;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 3.5vmin;
+  letter-spacing: 1vmin;
+  text-indent: 1vmin;
+}
+#home .buttons .start:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+#home .links {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 20px;
+}
+#home .links a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9;
+  background-image: linear-gradient(to bottom, #ca6ece, #232361);
+}
+#level .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85vw;
+  height: 80vmin;
+}
+#level .difficulty {
+  width: 20vw;
+  margin-right: 5vw;
+}
+#level .difficulty li {
+  box-sizing: content-box;
+  width: 20vw;
+  height: 3vw;
+  line-height: 3vw;
+  background-color: #fff;
+  border-radius: 2.5vw;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 0.5vw solid rgba(0, 0, 0, 0.2);
+  margin: 2vw 0;
+  font-size: 1.5vw;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  opacity: 0.7;
+}
+#level .difficulty li:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+#level .list {
+  width: 60vw;
+}
+#level .list li {
+  display: flex;
+  flex-wrap: wrap;
+  display: none;
+}
+#level .list li b {
+  box-sizing: content-box;
+  height: 4vw;
+  width: 4vw;
+  line-height: 4vw;
+  background-color: #fff;
+  pointer-events: none;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 0.5vw solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.5vw;
+  margin: 1vw;
+  font-size: 1.8vw;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.7);
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  opacity: 0.3;
+}
+#level .list li b[data-unlock] {
+  pointer-events: auto;
+  opacity: 0.7;
+}
+#level .list li b[data-unlock]:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+#level .list li b[data-unlock]:active {
+  transform: scale(1);
+}
+#level[data-tab="1"] .difficulty li:nth-child(1) {
+  opacity: 1;
+}
+#level[data-tab="1"] .list li:nth-child(1) {
+  display: flex;
+}
+#level[data-tab="2"] .difficulty li:nth-child(2) {
+  opacity: 1;
+}
+#level[data-tab="2"] .list li:nth-child(2) {
+  display: flex;
+}
+#level[data-tab="3"] .difficulty li:nth-child(3) {
+  opacity: 1;
+}
+#level[data-tab="3"] .list li:nth-child(3) {
+  display: flex;
+}
+#level[data-tab="4"] .difficulty li:nth-child(4) {
+  opacity: 1;
+}
+#level[data-tab="4"] .list li:nth-child(4) {
+  display: flex;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+#game #board #grid,
+#game #board #number {
+  width: 80vmin;
+  height: 80vmin;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+}
+#game #board #number {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#game #board .grid-nine {
+  width: 26.3vmin;
+  height: 26.3vmin;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+}
+#game #board .grid {
+  width: 8.7666666667vmin;
+  height: 8.7666666667vmin;
+  border: 0.2vmin solid transparent;
+  background-color: rgba(255, 255, 255, 0.9);
+  background-clip: content-box;
+  transition: background 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  position: relative;
+}
+#game #board .grid-transparent {
+  background-color: transparent;
+}
+#game #board .grid-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+#game #board .grid-number .dot {
+  will-change: transform;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 100%;
+  width: 6.1366666667vmin;
+  height: 6.1366666667vmin;
+  transform: scale(0) translateZ(0);
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform-origin: center;
+}
+#game #board .grid-number .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  font-size: 3.5vmin;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  transition: color 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+#game #board .grid-number .grid-small {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  color: #fff;
+}
+#game #board .grid-number .grid-small b {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+  width: 33.3333333333%;
+  height: 33.3333333333%;
+  opacity: 0.5;
+  transform: scale(1);
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform-origin: center;
+}
+#game #board .grid-number .grid-small b.candidate {
+  opacity: 1;
+}
+#game #board .grid-number:not([data-freeze]):hover .dot {
+  transform: scale(1);
+  opacity: 1;
+}
+#game #board .grid-number:not([data-freeze]):hover .number {
+  color: #fff;
+}
+#game #board .grid-number.data-active .dot {
+  border-radius: 0;
+  transform: scale(1);
+  opacity: 1;
+  width: auto;
+  height: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: -0.2vmin;
+  z-index: 9;
+}
+#game #board .grid-number.data-active .grid-small {
+  opacity: 1;
+  z-index: 10;
+}
+#game #board .grid-number.data-active .grid-small b {
+  color: #fff !important;
+}
+#game #board .grid-number.data-active .grid-small b:hover {
+  opacity: 1;
+  transform: scale(1.3);
+  transform-origin: center;
+}
+#game #board .grid-number.small-active .dot {
+  width: 8.7666666667vmin;
+  height: 8.7666666667vmin;
+}
+#game #board .grid-number.small-active .grid-small {
+  opacity: 1;
+  z-index: 1;
+}
+#game #board .grid-number.small-active .grid-small b:not(.candidate) {
+  opacity: 0;
+}
+#game #board .grid-number.small-active.data-active .grid-small {
+  z-index: 10;
+}
+#game #board .grid-number.small-active.data-active .grid-small b {
+  opacity: 0.5;
+}
+#game #board .grid-number.small-active.data-active .grid-small b.candidate {
+  opacity: 1;
+}
+#game #board .grid-number[data-invalid] .number::before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 5.26vmin;
+  height: 5.26vmin;
+  z-index: -1;
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  border: 0.5vmin solid currentColor;
+  border-radius: 100%;
+}
+#game #board .grid-number[data-invalid]:hover .number::before {
+  border-color: transparent;
+}
+#game #board .grid-number[data-invalid][data-freeze]:hover .number::before {
+  border-color: currentColor;
+}
+#game #board .grid-nine:nth-child(1) .grid:nth-child(1), #game #board .grid-nine:nth-child(1) .grid:nth-child(1) .data-active .dot {
+  border-top-left-radius: 2vmin;
+}
+#game #board .grid-nine:nth-child(3) .grid:nth-child(3), #game #board .grid-nine:nth-child(3) .grid:nth-child(3) .data-active .dot {
+  border-top-right-radius: 2vmin;
+}
+#game #board .grid-nine:nth-child(7) .grid:nth-child(7), #game #board .grid-nine:nth-child(7) .grid:nth-child(7) .data-active .dot {
+  border-bottom-left-radius: 2vmin;
+}
+#game #board .grid-nine:nth-child(9) .grid:nth-child(9), #game #board .grid-nine:nth-child(9) .grid:nth-child(9) .data-active .dot {
+  border-bottom-right-radius: 2vmin;
+}
+
+#win {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  filter: blur(1vmin);
+  transition: all 1s;
+}
+#win .text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#win .text span {
+  color: #fff;
+  font-size: 3vmin;
+}
+#win .text i {
+  display: inline-block;
+  width: 3vmin;
+  height: 6vmin;
+  position: relative;
+  transform: rotate(45deg);
+  transform-origin: 90% 50%;
+  margin-right: 3vmin;
+}
+#win .text i::before, #win .text i::after {
+  content: "";
+  position: absolute;
+  border-radius: 0.5vmin;
+  background-color: #fff;
+}
+#win .text i::before {
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1vmin;
+  transition: width 0.2s ease-in 0.6s;
+}
+#win .text i::after {
+  right: 0;
+  bottom: 0;
+  height: 0;
+  width: 1vmin;
+  transition: height 0.3s cubic-bezier(1, 0.42, 1, 1) 0.8s;
+}
+#win.show {
+  filter: blur(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#win.show .text i::before {
+  width: 3vmin;
+}
+#win.show .text i::after {
+  height: 6vmin;
+}
+#win.show + #game {
+  filter: blur(10px);
+}
+
+#game[game-color="1"] {
+  background: linear-gradient(15deg, #8f443d, #c27770);
+}
+#game[game-color="1"] #board #grid .grid[data-light] {
+  background-color: #e8ccc9;
+}
+#game[game-color="1"] #board #number .grid-number .dot {
+  background: linear-gradient(15deg, #8f443d, #c27770);
+}
+#game[game-color="1"] #board #number .grid-number-input .number {
+  color: #8f443d;
+}
+#game[game-color="1"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="1"] #board #number .grid-number.small-active .grid-small {
+  color: #8f443d;
+}
+#game[game-color="1"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="2"] {
+  background: linear-gradient(30deg, #8f4b3d, #c27e70);
+}
+#game[game-color="2"] #board #grid .grid[data-light] {
+  background-color: #e8cfc9;
+}
+#game[game-color="2"] #board #number .grid-number .dot {
+  background: linear-gradient(30deg, #8f4b3d, #c27e70);
+}
+#game[game-color="2"] #board #number .grid-number-input .number {
+  color: #8f4b3d;
+}
+#game[game-color="2"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="2"] #board #number .grid-number.small-active .grid-small {
+  color: #8f4b3d;
+}
+#game[game-color="2"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="3"] {
+  background: linear-gradient(45deg, #8f523d, #c28570);
+}
+#game[game-color="3"] #board #grid .grid[data-light] {
+  background-color: #e8d1c9;
+}
+#game[game-color="3"] #board #number .grid-number .dot {
+  background: linear-gradient(45deg, #8f523d, #c28570);
+}
+#game[game-color="3"] #board #number .grid-number-input .number {
+  color: #8f523d;
+}
+#game[game-color="3"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="3"] #board #number .grid-number.small-active .grid-small {
+  color: #8f523d;
+}
+#game[game-color="3"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="4"] {
+  background: linear-gradient(60deg, #8f583d, #c28b70);
+}
+#game[game-color="4"] #board #grid .grid[data-light] {
+  background-color: #e8d4c9;
+}
+#game[game-color="4"] #board #number .grid-number .dot {
+  background: linear-gradient(60deg, #8f583d, #c28b70);
+}
+#game[game-color="4"] #board #number .grid-number-input .number {
+  color: #8f583d;
+}
+#game[game-color="4"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="4"] #board #number .grid-number.small-active .grid-small {
+  color: #8f583d;
+}
+#game[game-color="4"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="5"] {
+  background: linear-gradient(75deg, #8f5f3d, #c29270);
+}
+#game[game-color="5"] #board #grid .grid[data-light] {
+  background-color: #e8d6c9;
+}
+#game[game-color="5"] #board #number .grid-number .dot {
+  background: linear-gradient(75deg, #8f5f3d, #c29270);
+}
+#game[game-color="5"] #board #number .grid-number-input .number {
+  color: #8f5f3d;
+}
+#game[game-color="5"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="5"] #board #number .grid-number.small-active .grid-small {
+  color: #8f5f3d;
+}
+#game[game-color="5"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="6"] {
+  background: linear-gradient(90deg, #8f663d, #c29970);
+}
+#game[game-color="6"] #board #grid .grid[data-light] {
+  background-color: #e8d9c9;
+}
+#game[game-color="6"] #board #number .grid-number .dot {
+  background: linear-gradient(90deg, #8f663d, #c29970);
+}
+#game[game-color="6"] #board #number .grid-number-input .number {
+  color: #8f663d;
+}
+#game[game-color="6"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="6"] #board #number .grid-number.small-active .grid-small {
+  color: #8f663d;
+}
+#game[game-color="6"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="7"] {
+  background: linear-gradient(105deg, #8f6d3d, #c2a070);
+}
+#game[game-color="7"] #board #grid .grid[data-light] {
+  background-color: #e8dbc9;
+}
+#game[game-color="7"] #board #number .grid-number .dot {
+  background: linear-gradient(105deg, #8f6d3d, #c2a070);
+}
+#game[game-color="7"] #board #number .grid-number-input .number {
+  color: #8f6d3d;
+}
+#game[game-color="7"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="7"] #board #number .grid-number.small-active .grid-small {
+  color: #8f6d3d;
+}
+#game[game-color="7"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="8"] {
+  background: linear-gradient(120deg, #8f743d, #c2a770);
+}
+#game[game-color="8"] #board #grid .grid[data-light] {
+  background-color: #e8dec9;
+}
+#game[game-color="8"] #board #number .grid-number .dot {
+  background: linear-gradient(120deg, #8f743d, #c2a770);
+}
+#game[game-color="8"] #board #number .grid-number-input .number {
+  color: #8f743d;
+}
+#game[game-color="8"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="8"] #board #number .grid-number.small-active .grid-small {
+  color: #8f743d;
+}
+#game[game-color="8"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="9"] {
+  background: linear-gradient(135deg, #8f7a3d, #c2ad70);
+}
+#game[game-color="9"] #board #grid .grid[data-light] {
+  background-color: #e8e0c9;
+}
+#game[game-color="9"] #board #number .grid-number .dot {
+  background: linear-gradient(135deg, #8f7a3d, #c2ad70);
+}
+#game[game-color="9"] #board #number .grid-number-input .number {
+  color: #8f7a3d;
+}
+#game[game-color="9"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="9"] #board #number .grid-number.small-active .grid-small {
+  color: #8f7a3d;
+}
+#game[game-color="9"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="10"] {
+  background: linear-gradient(150deg, #8f813d, #c2b470);
+}
+#game[game-color="10"] #board #grid .grid[data-light] {
+  background-color: #e8e3c9;
+}
+#game[game-color="10"] #board #number .grid-number .dot {
+  background: linear-gradient(150deg, #8f813d, #c2b470);
+}
+#game[game-color="10"] #board #number .grid-number-input .number {
+  color: #8f813d;
+}
+#game[game-color="10"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="10"] #board #number .grid-number.small-active .grid-small {
+  color: #8f813d;
+}
+#game[game-color="10"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="11"] {
+  background: linear-gradient(165deg, #8f883d, #c2bb70);
+}
+#game[game-color="11"] #board #grid .grid[data-light] {
+  background-color: #e8e6c9;
+}
+#game[game-color="11"] #board #number .grid-number .dot {
+  background: linear-gradient(165deg, #8f883d, #c2bb70);
+}
+#game[game-color="11"] #board #number .grid-number-input .number {
+  color: #8f883d;
+}
+#game[game-color="11"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="11"] #board #number .grid-number.small-active .grid-small {
+  color: #8f883d;
+}
+#game[game-color="11"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="12"] {
+  background: linear-gradient(180deg, #8f8f3d, #c2c270);
+}
+#game[game-color="12"] #board #grid .grid[data-light] {
+  background-color: #e8e8c9;
+}
+#game[game-color="12"] #board #number .grid-number .dot {
+  background: linear-gradient(180deg, #8f8f3d, #c2c270);
+}
+#game[game-color="12"] #board #number .grid-number-input .number {
+  color: #8f8f3d;
+}
+#game[game-color="12"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="12"] #board #number .grid-number.small-active .grid-small {
+  color: #8f8f3d;
+}
+#game[game-color="12"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="13"] {
+  background: linear-gradient(195deg, #888f3d, #bbc270);
+}
+#game[game-color="13"] #board #grid .grid[data-light] {
+  background-color: #e6e8c9;
+}
+#game[game-color="13"] #board #number .grid-number .dot {
+  background: linear-gradient(195deg, #888f3d, #bbc270);
+}
+#game[game-color="13"] #board #number .grid-number-input .number {
+  color: #888f3d;
+}
+#game[game-color="13"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="13"] #board #number .grid-number.small-active .grid-small {
+  color: #888f3d;
+}
+#game[game-color="13"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="14"] {
+  background: linear-gradient(210deg, #818f3d, #b4c270);
+}
+#game[game-color="14"] #board #grid .grid[data-light] {
+  background-color: #e3e8c9;
+}
+#game[game-color="14"] #board #number .grid-number .dot {
+  background: linear-gradient(210deg, #818f3d, #b4c270);
+}
+#game[game-color="14"] #board #number .grid-number-input .number {
+  color: #818f3d;
+}
+#game[game-color="14"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="14"] #board #number .grid-number.small-active .grid-small {
+  color: #818f3d;
+}
+#game[game-color="14"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="15"] {
+  background: linear-gradient(225deg, #7a8f3d, #adc270);
+}
+#game[game-color="15"] #board #grid .grid[data-light] {
+  background-color: #e0e8c9;
+}
+#game[game-color="15"] #board #number .grid-number .dot {
+  background: linear-gradient(225deg, #7a8f3d, #adc270);
+}
+#game[game-color="15"] #board #number .grid-number-input .number {
+  color: #7a8f3d;
+}
+#game[game-color="15"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="15"] #board #number .grid-number.small-active .grid-small {
+  color: #7a8f3d;
+}
+#game[game-color="15"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="16"] {
+  background: linear-gradient(240deg, #748f3d, #a7c270);
+}
+#game[game-color="16"] #board #grid .grid[data-light] {
+  background-color: #dee8c9;
+}
+#game[game-color="16"] #board #number .grid-number .dot {
+  background: linear-gradient(240deg, #748f3d, #a7c270);
+}
+#game[game-color="16"] #board #number .grid-number-input .number {
+  color: #748f3d;
+}
+#game[game-color="16"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="16"] #board #number .grid-number.small-active .grid-small {
+  color: #748f3d;
+}
+#game[game-color="16"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="17"] {
+  background: linear-gradient(255deg, #6d8f3d, #a0c270);
+}
+#game[game-color="17"] #board #grid .grid[data-light] {
+  background-color: #dbe8c9;
+}
+#game[game-color="17"] #board #number .grid-number .dot {
+  background: linear-gradient(255deg, #6d8f3d, #a0c270);
+}
+#game[game-color="17"] #board #number .grid-number-input .number {
+  color: #6d8f3d;
+}
+#game[game-color="17"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="17"] #board #number .grid-number.small-active .grid-small {
+  color: #6d8f3d;
+}
+#game[game-color="17"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="18"] {
+  background: linear-gradient(270deg, #668f3d, #99c270);
+}
+#game[game-color="18"] #board #grid .grid[data-light] {
+  background-color: #d9e8c9;
+}
+#game[game-color="18"] #board #number .grid-number .dot {
+  background: linear-gradient(270deg, #668f3d, #99c270);
+}
+#game[game-color="18"] #board #number .grid-number-input .number {
+  color: #668f3d;
+}
+#game[game-color="18"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="18"] #board #number .grid-number.small-active .grid-small {
+  color: #668f3d;
+}
+#game[game-color="18"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="19"] {
+  background: linear-gradient(285deg, #5f8f3d, #92c270);
+}
+#game[game-color="19"] #board #grid .grid[data-light] {
+  background-color: #d6e8c9;
+}
+#game[game-color="19"] #board #number .grid-number .dot {
+  background: linear-gradient(285deg, #5f8f3d, #92c270);
+}
+#game[game-color="19"] #board #number .grid-number-input .number {
+  color: #5f8f3d;
+}
+#game[game-color="19"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="19"] #board #number .grid-number.small-active .grid-small {
+  color: #5f8f3d;
+}
+#game[game-color="19"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="20"] {
+  background: linear-gradient(300deg, #588f3d, #8bc270);
+}
+#game[game-color="20"] #board #grid .grid[data-light] {
+  background-color: #d4e8c9;
+}
+#game[game-color="20"] #board #number .grid-number .dot {
+  background: linear-gradient(300deg, #588f3d, #8bc270);
+}
+#game[game-color="20"] #board #number .grid-number-input .number {
+  color: #588f3d;
+}
+#game[game-color="20"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="20"] #board #number .grid-number.small-active .grid-small {
+  color: #588f3d;
+}
+#game[game-color="20"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="21"] {
+  background: linear-gradient(315deg, #528f3d, #85c270);
+}
+#game[game-color="21"] #board #grid .grid[data-light] {
+  background-color: #d1e8c9;
+}
+#game[game-color="21"] #board #number .grid-number .dot {
+  background: linear-gradient(315deg, #528f3d, #85c270);
+}
+#game[game-color="21"] #board #number .grid-number-input .number {
+  color: #528f3d;
+}
+#game[game-color="21"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="21"] #board #number .grid-number.small-active .grid-small {
+  color: #528f3d;
+}
+#game[game-color="21"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="22"] {
+  background: linear-gradient(330deg, #4b8f3d, #7ec270);
+}
+#game[game-color="22"] #board #grid .grid[data-light] {
+  background-color: #cfe8c9;
+}
+#game[game-color="22"] #board #number .grid-number .dot {
+  background: linear-gradient(330deg, #4b8f3d, #7ec270);
+}
+#game[game-color="22"] #board #number .grid-number-input .number {
+  color: #4b8f3d;
+}
+#game[game-color="22"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="22"] #board #number .grid-number.small-active .grid-small {
+  color: #4b8f3d;
+}
+#game[game-color="22"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="23"] {
+  background: linear-gradient(345deg, #448f3d, #77c270);
+}
+#game[game-color="23"] #board #grid .grid[data-light] {
+  background-color: #cce8c9;
+}
+#game[game-color="23"] #board #number .grid-number .dot {
+  background: linear-gradient(345deg, #448f3d, #77c270);
+}
+#game[game-color="23"] #board #number .grid-number-input .number {
+  color: #448f3d;
+}
+#game[game-color="23"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="23"] #board #number .grid-number.small-active .grid-small {
+  color: #448f3d;
+}
+#game[game-color="23"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="24"] {
+  background: linear-gradient(360deg, #3d8f3d, #70c270);
+}
+#game[game-color="24"] #board #grid .grid[data-light] {
+  background-color: #c9e8c9;
+}
+#game[game-color="24"] #board #number .grid-number .dot {
+  background: linear-gradient(360deg, #3d8f3d, #70c270);
+}
+#game[game-color="24"] #board #number .grid-number-input .number {
+  color: #3d8f3d;
+}
+#game[game-color="24"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="24"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f3d;
+}
+#game[game-color="24"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="25"] {
+  background: linear-gradient(375deg, #3d8f44, #70c277);
+}
+#game[game-color="25"] #board #grid .grid[data-light] {
+  background-color: #c9e8cc;
+}
+#game[game-color="25"] #board #number .grid-number .dot {
+  background: linear-gradient(375deg, #3d8f44, #70c277);
+}
+#game[game-color="25"] #board #number .grid-number-input .number {
+  color: #3d8f44;
+}
+#game[game-color="25"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="25"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f44;
+}
+#game[game-color="25"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="26"] {
+  background: linear-gradient(390deg, #3d8f4b, #70c27e);
+}
+#game[game-color="26"] #board #grid .grid[data-light] {
+  background-color: #c9e8cf;
+}
+#game[game-color="26"] #board #number .grid-number .dot {
+  background: linear-gradient(390deg, #3d8f4b, #70c27e);
+}
+#game[game-color="26"] #board #number .grid-number-input .number {
+  color: #3d8f4b;
+}
+#game[game-color="26"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="26"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f4b;
+}
+#game[game-color="26"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="27"] {
+  background: linear-gradient(405deg, #3d8f52, #70c285);
+}
+#game[game-color="27"] #board #grid .grid[data-light] {
+  background-color: #c9e8d1;
+}
+#game[game-color="27"] #board #number .grid-number .dot {
+  background: linear-gradient(405deg, #3d8f52, #70c285);
+}
+#game[game-color="27"] #board #number .grid-number-input .number {
+  color: #3d8f52;
+}
+#game[game-color="27"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="27"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f52;
+}
+#game[game-color="27"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="28"] {
+  background: linear-gradient(420deg, #3d8f58, #70c28b);
+}
+#game[game-color="28"] #board #grid .grid[data-light] {
+  background-color: #c9e8d4;
+}
+#game[game-color="28"] #board #number .grid-number .dot {
+  background: linear-gradient(420deg, #3d8f58, #70c28b);
+}
+#game[game-color="28"] #board #number .grid-number-input .number {
+  color: #3d8f58;
+}
+#game[game-color="28"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="28"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f58;
+}
+#game[game-color="28"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="29"] {
+  background: linear-gradient(435deg, #3d8f5f, #70c292);
+}
+#game[game-color="29"] #board #grid .grid[data-light] {
+  background-color: #c9e8d6;
+}
+#game[game-color="29"] #board #number .grid-number .dot {
+  background: linear-gradient(435deg, #3d8f5f, #70c292);
+}
+#game[game-color="29"] #board #number .grid-number-input .number {
+  color: #3d8f5f;
+}
+#game[game-color="29"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="29"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f5f;
+}
+#game[game-color="29"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="30"] {
+  background: linear-gradient(450deg, #3d8f66, #70c299);
+}
+#game[game-color="30"] #board #grid .grid[data-light] {
+  background-color: #c9e8d9;
+}
+#game[game-color="30"] #board #number .grid-number .dot {
+  background: linear-gradient(450deg, #3d8f66, #70c299);
+}
+#game[game-color="30"] #board #number .grid-number-input .number {
+  color: #3d8f66;
+}
+#game[game-color="30"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="30"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f66;
+}
+#game[game-color="30"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="31"] {
+  background: linear-gradient(465deg, #3d8f6d, #70c2a0);
+}
+#game[game-color="31"] #board #grid .grid[data-light] {
+  background-color: #c9e8db;
+}
+#game[game-color="31"] #board #number .grid-number .dot {
+  background: linear-gradient(465deg, #3d8f6d, #70c2a0);
+}
+#game[game-color="31"] #board #number .grid-number-input .number {
+  color: #3d8f6d;
+}
+#game[game-color="31"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="31"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f6d;
+}
+#game[game-color="31"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="32"] {
+  background: linear-gradient(480deg, #3d8f74, #70c2a7);
+}
+#game[game-color="32"] #board #grid .grid[data-light] {
+  background-color: #c9e8de;
+}
+#game[game-color="32"] #board #number .grid-number .dot {
+  background: linear-gradient(480deg, #3d8f74, #70c2a7);
+}
+#game[game-color="32"] #board #number .grid-number-input .number {
+  color: #3d8f74;
+}
+#game[game-color="32"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="32"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f74;
+}
+#game[game-color="32"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="33"] {
+  background: linear-gradient(495deg, #3d8f7a, #70c2ad);
+}
+#game[game-color="33"] #board #grid .grid[data-light] {
+  background-color: #c9e8e0;
+}
+#game[game-color="33"] #board #number .grid-number .dot {
+  background: linear-gradient(495deg, #3d8f7a, #70c2ad);
+}
+#game[game-color="33"] #board #number .grid-number-input .number {
+  color: #3d8f7a;
+}
+#game[game-color="33"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="33"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f7a;
+}
+#game[game-color="33"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="34"] {
+  background: linear-gradient(510deg, #3d8f81, #70c2b4);
+}
+#game[game-color="34"] #board #grid .grid[data-light] {
+  background-color: #c9e8e3;
+}
+#game[game-color="34"] #board #number .grid-number .dot {
+  background: linear-gradient(510deg, #3d8f81, #70c2b4);
+}
+#game[game-color="34"] #board #number .grid-number-input .number {
+  color: #3d8f81;
+}
+#game[game-color="34"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="34"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f81;
+}
+#game[game-color="34"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="35"] {
+  background: linear-gradient(525deg, #3d8f88, #70c2bb);
+}
+#game[game-color="35"] #board #grid .grid[data-light] {
+  background-color: #c9e8e6;
+}
+#game[game-color="35"] #board #number .grid-number .dot {
+  background: linear-gradient(525deg, #3d8f88, #70c2bb);
+}
+#game[game-color="35"] #board #number .grid-number-input .number {
+  color: #3d8f88;
+}
+#game[game-color="35"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="35"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f88;
+}
+#game[game-color="35"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="36"] {
+  background: linear-gradient(540deg, #3d8f8f, #70c2c2);
+}
+#game[game-color="36"] #board #grid .grid[data-light] {
+  background-color: #c9e8e8;
+}
+#game[game-color="36"] #board #number .grid-number .dot {
+  background: linear-gradient(540deg, #3d8f8f, #70c2c2);
+}
+#game[game-color="36"] #board #number .grid-number-input .number {
+  color: #3d8f8f;
+}
+#game[game-color="36"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="36"] #board #number .grid-number.small-active .grid-small {
+  color: #3d8f8f;
+}
+#game[game-color="36"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="37"] {
+  background: linear-gradient(555deg, #3d888f, #70bbc2);
+}
+#game[game-color="37"] #board #grid .grid[data-light] {
+  background-color: #c9e6e8;
+}
+#game[game-color="37"] #board #number .grid-number .dot {
+  background: linear-gradient(555deg, #3d888f, #70bbc2);
+}
+#game[game-color="37"] #board #number .grid-number-input .number {
+  color: #3d888f;
+}
+#game[game-color="37"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="37"] #board #number .grid-number.small-active .grid-small {
+  color: #3d888f;
+}
+#game[game-color="37"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="38"] {
+  background: linear-gradient(570deg, #3d818f, #70b4c2);
+}
+#game[game-color="38"] #board #grid .grid[data-light] {
+  background-color: #c9e3e8;
+}
+#game[game-color="38"] #board #number .grid-number .dot {
+  background: linear-gradient(570deg, #3d818f, #70b4c2);
+}
+#game[game-color="38"] #board #number .grid-number-input .number {
+  color: #3d818f;
+}
+#game[game-color="38"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="38"] #board #number .grid-number.small-active .grid-small {
+  color: #3d818f;
+}
+#game[game-color="38"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="39"] {
+  background: linear-gradient(585deg, #3d7a8f, #70adc2);
+}
+#game[game-color="39"] #board #grid .grid[data-light] {
+  background-color: #c9e0e8;
+}
+#game[game-color="39"] #board #number .grid-number .dot {
+  background: linear-gradient(585deg, #3d7a8f, #70adc2);
+}
+#game[game-color="39"] #board #number .grid-number-input .number {
+  color: #3d7a8f;
+}
+#game[game-color="39"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="39"] #board #number .grid-number.small-active .grid-small {
+  color: #3d7a8f;
+}
+#game[game-color="39"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="40"] {
+  background: linear-gradient(600deg, #3d748f, #70a7c2);
+}
+#game[game-color="40"] #board #grid .grid[data-light] {
+  background-color: #c9dee8;
+}
+#game[game-color="40"] #board #number .grid-number .dot {
+  background: linear-gradient(600deg, #3d748f, #70a7c2);
+}
+#game[game-color="40"] #board #number .grid-number-input .number {
+  color: #3d748f;
+}
+#game[game-color="40"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="40"] #board #number .grid-number.small-active .grid-small {
+  color: #3d748f;
+}
+#game[game-color="40"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="41"] {
+  background: linear-gradient(615deg, #3d6d8f, #70a0c2);
+}
+#game[game-color="41"] #board #grid .grid[data-light] {
+  background-color: #c9dbe8;
+}
+#game[game-color="41"] #board #number .grid-number .dot {
+  background: linear-gradient(615deg, #3d6d8f, #70a0c2);
+}
+#game[game-color="41"] #board #number .grid-number-input .number {
+  color: #3d6d8f;
+}
+#game[game-color="41"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="41"] #board #number .grid-number.small-active .grid-small {
+  color: #3d6d8f;
+}
+#game[game-color="41"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="42"] {
+  background: linear-gradient(630deg, #3d668f, #7099c2);
+}
+#game[game-color="42"] #board #grid .grid[data-light] {
+  background-color: #c9d9e8;
+}
+#game[game-color="42"] #board #number .grid-number .dot {
+  background: linear-gradient(630deg, #3d668f, #7099c2);
+}
+#game[game-color="42"] #board #number .grid-number-input .number {
+  color: #3d668f;
+}
+#game[game-color="42"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="42"] #board #number .grid-number.small-active .grid-small {
+  color: #3d668f;
+}
+#game[game-color="42"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="43"] {
+  background: linear-gradient(645deg, #3d5f8f, #7092c2);
+}
+#game[game-color="43"] #board #grid .grid[data-light] {
+  background-color: #c9d6e8;
+}
+#game[game-color="43"] #board #number .grid-number .dot {
+  background: linear-gradient(645deg, #3d5f8f, #7092c2);
+}
+#game[game-color="43"] #board #number .grid-number-input .number {
+  color: #3d5f8f;
+}
+#game[game-color="43"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="43"] #board #number .grid-number.small-active .grid-small {
+  color: #3d5f8f;
+}
+#game[game-color="43"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="44"] {
+  background: linear-gradient(660deg, #3d588f, #708bc2);
+}
+#game[game-color="44"] #board #grid .grid[data-light] {
+  background-color: #c9d4e8;
+}
+#game[game-color="44"] #board #number .grid-number .dot {
+  background: linear-gradient(660deg, #3d588f, #708bc2);
+}
+#game[game-color="44"] #board #number .grid-number-input .number {
+  color: #3d588f;
+}
+#game[game-color="44"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="44"] #board #number .grid-number.small-active .grid-small {
+  color: #3d588f;
+}
+#game[game-color="44"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="45"] {
+  background: linear-gradient(675deg, #3d528f, #7085c2);
+}
+#game[game-color="45"] #board #grid .grid[data-light] {
+  background-color: #c9d1e8;
+}
+#game[game-color="45"] #board #number .grid-number .dot {
+  background: linear-gradient(675deg, #3d528f, #7085c2);
+}
+#game[game-color="45"] #board #number .grid-number-input .number {
+  color: #3d528f;
+}
+#game[game-color="45"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="45"] #board #number .grid-number.small-active .grid-small {
+  color: #3d528f;
+}
+#game[game-color="45"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="46"] {
+  background: linear-gradient(690deg, #3d4b8f, #707ec2);
+}
+#game[game-color="46"] #board #grid .grid[data-light] {
+  background-color: #c9cfe8;
+}
+#game[game-color="46"] #board #number .grid-number .dot {
+  background: linear-gradient(690deg, #3d4b8f, #707ec2);
+}
+#game[game-color="46"] #board #number .grid-number-input .number {
+  color: #3d4b8f;
+}
+#game[game-color="46"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="46"] #board #number .grid-number.small-active .grid-small {
+  color: #3d4b8f;
+}
+#game[game-color="46"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="47"] {
+  background: linear-gradient(705deg, #3d448f, #7077c2);
+}
+#game[game-color="47"] #board #grid .grid[data-light] {
+  background-color: #c9cce8;
+}
+#game[game-color="47"] #board #number .grid-number .dot {
+  background: linear-gradient(705deg, #3d448f, #7077c2);
+}
+#game[game-color="47"] #board #number .grid-number-input .number {
+  color: #3d448f;
+}
+#game[game-color="47"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="47"] #board #number .grid-number.small-active .grid-small {
+  color: #3d448f;
+}
+#game[game-color="47"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="48"] {
+  background: linear-gradient(720deg, #3d3d8f, #7070c2);
+}
+#game[game-color="48"] #board #grid .grid[data-light] {
+  background-color: #c9c9e8;
+}
+#game[game-color="48"] #board #number .grid-number .dot {
+  background: linear-gradient(720deg, #3d3d8f, #7070c2);
+}
+#game[game-color="48"] #board #number .grid-number-input .number {
+  color: #3d3d8f;
+}
+#game[game-color="48"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="48"] #board #number .grid-number.small-active .grid-small {
+  color: #3d3d8f;
+}
+#game[game-color="48"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="49"] {
+  background: linear-gradient(735deg, #443d8f, #7770c2);
+}
+#game[game-color="49"] #board #grid .grid[data-light] {
+  background-color: #ccc9e8;
+}
+#game[game-color="49"] #board #number .grid-number .dot {
+  background: linear-gradient(735deg, #443d8f, #7770c2);
+}
+#game[game-color="49"] #board #number .grid-number-input .number {
+  color: #443d8f;
+}
+#game[game-color="49"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="49"] #board #number .grid-number.small-active .grid-small {
+  color: #443d8f;
+}
+#game[game-color="49"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="50"] {
+  background: linear-gradient(750deg, #4b3d8f, #7e70c2);
+}
+#game[game-color="50"] #board #grid .grid[data-light] {
+  background-color: #cfc9e8;
+}
+#game[game-color="50"] #board #number .grid-number .dot {
+  background: linear-gradient(750deg, #4b3d8f, #7e70c2);
+}
+#game[game-color="50"] #board #number .grid-number-input .number {
+  color: #4b3d8f;
+}
+#game[game-color="50"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="50"] #board #number .grid-number.small-active .grid-small {
+  color: #4b3d8f;
+}
+#game[game-color="50"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="51"] {
+  background: linear-gradient(765deg, #523d8f, #8570c2);
+}
+#game[game-color="51"] #board #grid .grid[data-light] {
+  background-color: #d1c9e8;
+}
+#game[game-color="51"] #board #number .grid-number .dot {
+  background: linear-gradient(765deg, #523d8f, #8570c2);
+}
+#game[game-color="51"] #board #number .grid-number-input .number {
+  color: #523d8f;
+}
+#game[game-color="51"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="51"] #board #number .grid-number.small-active .grid-small {
+  color: #523d8f;
+}
+#game[game-color="51"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="52"] {
+  background: linear-gradient(780deg, #583d8f, #8b70c2);
+}
+#game[game-color="52"] #board #grid .grid[data-light] {
+  background-color: #d4c9e8;
+}
+#game[game-color="52"] #board #number .grid-number .dot {
+  background: linear-gradient(780deg, #583d8f, #8b70c2);
+}
+#game[game-color="52"] #board #number .grid-number-input .number {
+  color: #583d8f;
+}
+#game[game-color="52"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="52"] #board #number .grid-number.small-active .grid-small {
+  color: #583d8f;
+}
+#game[game-color="52"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="53"] {
+  background: linear-gradient(795deg, #5f3d8f, #9270c2);
+}
+#game[game-color="53"] #board #grid .grid[data-light] {
+  background-color: #d6c9e8;
+}
+#game[game-color="53"] #board #number .grid-number .dot {
+  background: linear-gradient(795deg, #5f3d8f, #9270c2);
+}
+#game[game-color="53"] #board #number .grid-number-input .number {
+  color: #5f3d8f;
+}
+#game[game-color="53"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="53"] #board #number .grid-number.small-active .grid-small {
+  color: #5f3d8f;
+}
+#game[game-color="53"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="54"] {
+  background: linear-gradient(810deg, #663d8f, #9970c2);
+}
+#game[game-color="54"] #board #grid .grid[data-light] {
+  background-color: #d9c9e8;
+}
+#game[game-color="54"] #board #number .grid-number .dot {
+  background: linear-gradient(810deg, #663d8f, #9970c2);
+}
+#game[game-color="54"] #board #number .grid-number-input .number {
+  color: #663d8f;
+}
+#game[game-color="54"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="54"] #board #number .grid-number.small-active .grid-small {
+  color: #663d8f;
+}
+#game[game-color="54"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="55"] {
+  background: linear-gradient(825deg, #6d3d8f, #a070c2);
+}
+#game[game-color="55"] #board #grid .grid[data-light] {
+  background-color: #dbc9e8;
+}
+#game[game-color="55"] #board #number .grid-number .dot {
+  background: linear-gradient(825deg, #6d3d8f, #a070c2);
+}
+#game[game-color="55"] #board #number .grid-number-input .number {
+  color: #6d3d8f;
+}
+#game[game-color="55"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="55"] #board #number .grid-number.small-active .grid-small {
+  color: #6d3d8f;
+}
+#game[game-color="55"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="56"] {
+  background: linear-gradient(840deg, #743d8f, #a770c2);
+}
+#game[game-color="56"] #board #grid .grid[data-light] {
+  background-color: #dec9e8;
+}
+#game[game-color="56"] #board #number .grid-number .dot {
+  background: linear-gradient(840deg, #743d8f, #a770c2);
+}
+#game[game-color="56"] #board #number .grid-number-input .number {
+  color: #743d8f;
+}
+#game[game-color="56"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="56"] #board #number .grid-number.small-active .grid-small {
+  color: #743d8f;
+}
+#game[game-color="56"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="57"] {
+  background: linear-gradient(855deg, #7a3d8f, #ad70c2);
+}
+#game[game-color="57"] #board #grid .grid[data-light] {
+  background-color: #e0c9e8;
+}
+#game[game-color="57"] #board #number .grid-number .dot {
+  background: linear-gradient(855deg, #7a3d8f, #ad70c2);
+}
+#game[game-color="57"] #board #number .grid-number-input .number {
+  color: #7a3d8f;
+}
+#game[game-color="57"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="57"] #board #number .grid-number.small-active .grid-small {
+  color: #7a3d8f;
+}
+#game[game-color="57"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="58"] {
+  background: linear-gradient(870deg, #813d8f, #b470c2);
+}
+#game[game-color="58"] #board #grid .grid[data-light] {
+  background-color: #e3c9e8;
+}
+#game[game-color="58"] #board #number .grid-number .dot {
+  background: linear-gradient(870deg, #813d8f, #b470c2);
+}
+#game[game-color="58"] #board #number .grid-number-input .number {
+  color: #813d8f;
+}
+#game[game-color="58"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="58"] #board #number .grid-number.small-active .grid-small {
+  color: #813d8f;
+}
+#game[game-color="58"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="59"] {
+  background: linear-gradient(885deg, #883d8f, #bb70c2);
+}
+#game[game-color="59"] #board #grid .grid[data-light] {
+  background-color: #e6c9e8;
+}
+#game[game-color="59"] #board #number .grid-number .dot {
+  background: linear-gradient(885deg, #883d8f, #bb70c2);
+}
+#game[game-color="59"] #board #number .grid-number-input .number {
+  color: #883d8f;
+}
+#game[game-color="59"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="59"] #board #number .grid-number.small-active .grid-small {
+  color: #883d8f;
+}
+#game[game-color="59"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="60"] {
+  background: linear-gradient(900deg, #8f3d8f, #c270c2);
+}
+#game[game-color="60"] #board #grid .grid[data-light] {
+  background-color: #e8c9e8;
+}
+#game[game-color="60"] #board #number .grid-number .dot {
+  background: linear-gradient(900deg, #8f3d8f, #c270c2);
+}
+#game[game-color="60"] #board #number .grid-number-input .number {
+  color: #8f3d8f;
+}
+#game[game-color="60"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="60"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d8f;
+}
+#game[game-color="60"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="61"] {
+  background: linear-gradient(915deg, #8f3d88, #c270bb);
+}
+#game[game-color="61"] #board #grid .grid[data-light] {
+  background-color: #e8c9e6;
+}
+#game[game-color="61"] #board #number .grid-number .dot {
+  background: linear-gradient(915deg, #8f3d88, #c270bb);
+}
+#game[game-color="61"] #board #number .grid-number-input .number {
+  color: #8f3d88;
+}
+#game[game-color="61"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="61"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d88;
+}
+#game[game-color="61"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="62"] {
+  background: linear-gradient(930deg, #8f3d81, #c270b4);
+}
+#game[game-color="62"] #board #grid .grid[data-light] {
+  background-color: #e8c9e3;
+}
+#game[game-color="62"] #board #number .grid-number .dot {
+  background: linear-gradient(930deg, #8f3d81, #c270b4);
+}
+#game[game-color="62"] #board #number .grid-number-input .number {
+  color: #8f3d81;
+}
+#game[game-color="62"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="62"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d81;
+}
+#game[game-color="62"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="63"] {
+  background: linear-gradient(945deg, #8f3d7a, #c270ad);
+}
+#game[game-color="63"] #board #grid .grid[data-light] {
+  background-color: #e8c9e0;
+}
+#game[game-color="63"] #board #number .grid-number .dot {
+  background: linear-gradient(945deg, #8f3d7a, #c270ad);
+}
+#game[game-color="63"] #board #number .grid-number-input .number {
+  color: #8f3d7a;
+}
+#game[game-color="63"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="63"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d7a;
+}
+#game[game-color="63"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="64"] {
+  background: linear-gradient(960deg, #8f3d74, #c270a7);
+}
+#game[game-color="64"] #board #grid .grid[data-light] {
+  background-color: #e8c9de;
+}
+#game[game-color="64"] #board #number .grid-number .dot {
+  background: linear-gradient(960deg, #8f3d74, #c270a7);
+}
+#game[game-color="64"] #board #number .grid-number-input .number {
+  color: #8f3d74;
+}
+#game[game-color="64"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="64"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d74;
+}
+#game[game-color="64"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="65"] {
+  background: linear-gradient(975deg, #8f3d6d, #c270a0);
+}
+#game[game-color="65"] #board #grid .grid[data-light] {
+  background-color: #e8c9db;
+}
+#game[game-color="65"] #board #number .grid-number .dot {
+  background: linear-gradient(975deg, #8f3d6d, #c270a0);
+}
+#game[game-color="65"] #board #number .grid-number-input .number {
+  color: #8f3d6d;
+}
+#game[game-color="65"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="65"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d6d;
+}
+#game[game-color="65"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="66"] {
+  background: linear-gradient(990deg, #8f3d66, #c27099);
+}
+#game[game-color="66"] #board #grid .grid[data-light] {
+  background-color: #e8c9d9;
+}
+#game[game-color="66"] #board #number .grid-number .dot {
+  background: linear-gradient(990deg, #8f3d66, #c27099);
+}
+#game[game-color="66"] #board #number .grid-number-input .number {
+  color: #8f3d66;
+}
+#game[game-color="66"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="66"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d66;
+}
+#game[game-color="66"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="67"] {
+  background: linear-gradient(1005deg, #8f3d5f, #c27092);
+}
+#game[game-color="67"] #board #grid .grid[data-light] {
+  background-color: #e8c9d6;
+}
+#game[game-color="67"] #board #number .grid-number .dot {
+  background: linear-gradient(1005deg, #8f3d5f, #c27092);
+}
+#game[game-color="67"] #board #number .grid-number-input .number {
+  color: #8f3d5f;
+}
+#game[game-color="67"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="67"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d5f;
+}
+#game[game-color="67"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="68"] {
+  background: linear-gradient(1020deg, #8f3d58, #c2708b);
+}
+#game[game-color="68"] #board #grid .grid[data-light] {
+  background-color: #e8c9d4;
+}
+#game[game-color="68"] #board #number .grid-number .dot {
+  background: linear-gradient(1020deg, #8f3d58, #c2708b);
+}
+#game[game-color="68"] #board #number .grid-number-input .number {
+  color: #8f3d58;
+}
+#game[game-color="68"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="68"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d58;
+}
+#game[game-color="68"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="69"] {
+  background: linear-gradient(1035deg, #8f3d52, #c27085);
+}
+#game[game-color="69"] #board #grid .grid[data-light] {
+  background-color: #e8c9d1;
+}
+#game[game-color="69"] #board #number .grid-number .dot {
+  background: linear-gradient(1035deg, #8f3d52, #c27085);
+}
+#game[game-color="69"] #board #number .grid-number-input .number {
+  color: #8f3d52;
+}
+#game[game-color="69"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="69"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d52;
+}
+#game[game-color="69"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="70"] {
+  background: linear-gradient(1050deg, #8f3d4b, #c2707e);
+}
+#game[game-color="70"] #board #grid .grid[data-light] {
+  background-color: #e8c9cf;
+}
+#game[game-color="70"] #board #number .grid-number .dot {
+  background: linear-gradient(1050deg, #8f3d4b, #c2707e);
+}
+#game[game-color="70"] #board #number .grid-number-input .number {
+  color: #8f3d4b;
+}
+#game[game-color="70"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="70"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d4b;
+}
+#game[game-color="70"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="71"] {
+  background: linear-gradient(1065deg, #8f3d44, #c27077);
+}
+#game[game-color="71"] #board #grid .grid[data-light] {
+  background-color: #e8c9cc;
+}
+#game[game-color="71"] #board #number .grid-number .dot {
+  background: linear-gradient(1065deg, #8f3d44, #c27077);
+}
+#game[game-color="71"] #board #number .grid-number-input .number {
+  color: #8f3d44;
+}
+#game[game-color="71"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="71"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d44;
+}
+#game[game-color="71"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="72"] {
+  background: linear-gradient(1080deg, #8f3d3d, #c27070);
+}
+#game[game-color="72"] #board #grid .grid[data-light] {
+  background-color: #e8c9c9;
+}
+#game[game-color="72"] #board #number .grid-number .dot {
+  background: linear-gradient(1080deg, #8f3d3d, #c27070);
+}
+#game[game-color="72"] #board #number .grid-number-input .number {
+  color: #8f3d3d;
+}
+#game[game-color="72"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="72"] #board #number .grid-number.small-active .grid-small {
+  color: #8f3d3d;
+}
+#game[game-color="72"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+#game[game-color="73"] {
+  background: linear-gradient(1095deg, #8f443d, #c27770);
+}
+#game[game-color="73"] #board #grid .grid[data-light] {
+  background-color: #e8ccc9;
+}
+#game[game-color="73"] #board #number .grid-number .dot {
+  background: linear-gradient(1095deg, #8f443d, #c27770);
+}
+#game[game-color="73"] #board #number .grid-number-input .number {
+  color: #8f443d;
+}
+#game[game-color="73"] #board #number .grid-number-input .number:hover {
+  color: #fff;
+}
+#game[game-color="73"] #board #number .grid-number.small-active .grid-small {
+  color: #8f443d;
+}
+#game[game-color="73"] #board #number .grid-number.small-active:hover .grid-small {
+  color: #fff;
+}
+
+/*# sourceMappingURL=index.css.map */

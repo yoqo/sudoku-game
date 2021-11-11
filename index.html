@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudoku Game</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="home">
+        <div class="title">
+          <h1>数独</h1>
+          <h2>SUDOKU</h2>
+        </div>
+        <div class="buttons">
+          <div class="start" onclick="game.level()">START</div>
+        </div>
+        <div class="links">
+          <a href="https://github.com/airbnb/javascript" target="_blank"
+            >Github</a
+          >
+        </div>
+      </div>
+      <div id="level">
+        <div class="main">
+          <ul class="difficulty">
+            <li onclick="game.levelTab(1)">Easy</li>
+            <li onclick="game.levelTab(2)">Normal</li>
+            <li onclick="game.levelTab(3)">Hard</li>
+            <li onclick="game.levelTab(4)">Hell</li>
+            <!-- <li onclick="game.levelTab(5)">Random</li> -->
+          </ul>
+          <ul class="list"></ul>
+        </div>
+        <div class="game-handler game-handler-rt">
+          <div class="g-btn g-btn-icon" onclick="game.home()">
+            <i class="icono-power"></i>
+          </div>
+        </div>
+      </div>
+      <div id="win">
+        <div class="text"><i></i><span>Level complete!</span></div>
+      </div>
+      <div id="game">
+        <div id="board">
+          <div id="grid"></div>
+          <div id="number"></div>
+        </div>
+        <div class="game-handler game-handler-rt">
+          <div class="g-btn g-btn-icon" onclick="game.restart()">
+            <i class="icono-reset"></i>
+          </div>
+          <div class="g-btn g-btn-icon" onclick="game.level()">
+            <i class="icono-power"></i>
+          </div>
+        </div>
+        <div class="game-handler game-handler-rb">
+          <div class="g-btn g-btn-icon" onclick="game.randomColor()">
+            <i class="icono-sliders"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let game = new Game();
+    </script>
+  </body>
+</html>

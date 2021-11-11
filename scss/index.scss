@@ -1,0 +1,688 @@
+$out: cubic-bezier(0.22, 0.61, 0.36, 1);
+$gridNineWidth: 26.3vmin;
+$cellWidth: calc($gridNineWidth / 3);
+$cellBorderWidth: 0.2vmin;
+$level-bg-1: linear-gradient(to right, #c9d6ff, #e2e2e2);
+$level-bg-2: linear-gradient(to right, #1c92d2, #f2fcfe);
+$level-bg-3: linear-gradient(to right, #ff9966, #ff5e62);
+$level-bg-4: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+@function color($num) {
+  @return hsl($num * 5, 40%, 40%);
+}
+@function black($num) {
+  @return rgba(0, 0, 0, $num * 0.01);
+}
+@function white($num) {
+  @return rgba(255, 255, 255, $num * 0.01);
+}
+
+@mixin fullscreen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin ab-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin transition {
+  transition: all 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.fadeIn {
+  animation: fadeIn 2s $out backwards;
+}
+.fadeOut {
+  animation: fadeOut 2s $out forwards;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  background: #000;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, "microsoft-yahei", sans-serif;
+  user-select: none;
+}
+
+// 图标
+[class*="icono-"] {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  font-style: normal;
+  color: currentColor;
+  text-align: left;
+  text-indent: -9999px;
+  direction: ltr;
+  &::after,
+  &::before {
+    content: "";
+  }
+}
+.icono-sliders {
+  height: 30px;
+  width: 30px;
+  margin: 2px;
+  &::after,
+  &::before {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+  }
+  &::before {
+    width: 8px;
+    height: 7px;
+    border-radius: 2px;
+    top: 67%;
+    box-shadow: inset 0 0 0 32px, 10px -10px, -10px -14px;
+  }
+  &::after {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    box-shadow: inset 0 0 0 32px, 10px 0, -10px 0;
+  }
+}
+.icono-reset {
+  width: 26px;
+  height: 26px;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+  margin: 4px;
+  border-left-color: transparent;
+  &::before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -7px;
+    bottom: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    transform: rotate(135deg);
+  }
+}
+.icono-power {
+  width: 22px;
+  height: 22px;
+  margin: 6px;
+  border: 2px solid;
+  border-top-color: transparent;
+  border-radius: 50%;
+  &::before {
+    position: absolute;
+    top: -15%;
+    left: 8px;
+    width: 2px;
+    height: 60%;
+    box-shadow: inset 0 0 0 32px;
+  }
+}
+
+.zIndexTop {
+  z-index: 10000;
+}
+.hide {
+  display: none !important;
+}
+.show-flex {
+  display: flex !important;
+}
+
+.game-handler {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  height: 55px;
+  .g-btn {
+    @include flex-center();
+    box-sizing: content-box;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 5px;
+    color: #666;
+    transition: all 0.2s $out;
+    margin-right: 3vmin;
+    border-bottom: 5px solid black(20);
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
+      border-bottom-width: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &-rt {
+    right: 3vmin;
+    top: 3vmin;
+  }
+  &-rb {
+    right: 3vmin;
+    bottom: 3vmin;
+  }
+}
+#app {
+  @include fullscreen();
+  overflow: hidden;
+}
+#home {
+  @include flex-center();
+  @include fullscreen();
+  flex-direction: column;
+  background-image: linear-gradient(to bottom, #ca6ece, #232361);
+  text-align: center;
+  z-index: 10;
+  .title {
+    position: relative;
+    height: 25vmin;
+    width: 100vw;
+    h1,
+    h2 {
+      @include ab-center();
+    }
+    h1 {
+      color: black(20);
+      font-size: 25vmin;
+      width: 100vmin;
+    }
+    h2 {
+      color: white(80);
+      font-size: 8vmin;
+    }
+  }
+  .buttons {
+    @include flex-center();
+    padding-top: 5vmin;
+    .start {
+      @include transition();
+      box-sizing: content-box;
+      width: 50vmin;
+      height: 10vmin;
+      line-height: 10vmin;
+      border: 1px solid white(20);
+      border-radius: 1vmin;
+      color: white(60);
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 3.5vmin;
+      letter-spacing: 1vmin;
+      text-indent: 1vmin;
+      &:hover {
+        border-color: white(40);
+        background-color: white(10);
+        color: white(80);
+      }
+    }
+  }
+  .links {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 20px;
+    a {
+      color: white(50);
+    }
+  }
+}
+#level {
+  @include flex-center();
+  @include fullscreen();
+  z-index: 9;
+  background-image: linear-gradient(to bottom, #ca6ece, #232361);
+  .main {
+    @include flex-center();
+    width: 85vw;
+    height: 80vmin;
+  }
+  .difficulty {
+    width: 20vw;
+    margin-right: 5vw;
+    li {
+      box-sizing: content-box;
+      width: 20vw;
+      height: 3vw;
+      line-height: 3vw;
+      background-color: #fff;
+      border-radius: 2.5vw;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 0.5vw solid black(20);
+      margin: 2vw 0;
+      font-size: 1.5vw;
+      font-weight: bold;
+      color: black(70);
+      transition: all 0.2s $out;
+      opacity: 0.7;
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+      }
+    }
+  }
+  .list {
+    width: 60vw;
+    li {
+      display: flex;
+      flex-wrap: wrap;
+      display: none;
+      b {
+        box-sizing: content-box;
+        height: 4vw;
+        width: 4vw;
+        line-height: 4vw;
+        background-color: #fff;
+        pointer-events: none;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: 0.5vw solid black(20);
+        border-radius: 0.5vw;
+        margin: 1vw;
+        font-size: 1.8vw;
+        font-weight: bold;
+        color: black(70);
+        transition: all 0.2s $out;
+        opacity: 0.3;
+        &[data-unlock] {
+          pointer-events: auto;
+          opacity: 0.7;
+          &:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+          }
+          &:active {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+  &[data-tab="1"] {
+    .difficulty li:nth-child(1) {
+      opacity: 1;
+    }
+    .list li:nth-child(1) {
+      display: flex;
+    }
+  }
+  &[data-tab="2"] {
+    .difficulty li:nth-child(2) {
+      opacity: 1;
+    }
+    .list li:nth-child(2) {
+      display: flex;
+    }
+  }
+  &[data-tab="3"] {
+    .difficulty li:nth-child(3) {
+      opacity: 1;
+    }
+    .list li:nth-child(3) {
+      display: flex;
+    }
+  }
+  &[data-tab="4"] {
+    .difficulty li:nth-child(4) {
+      opacity: 1;
+    }
+    .list li:nth-child(4) {
+      display: flex;
+    }
+  }
+}
+#game {
+  @include flex-center();
+  @include fullscreen();
+  z-index: 1;
+  #board {
+    #grid,
+    #number {
+      width: 80vmin;
+      height: 80vmin;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+    }
+    #number {
+      @include ab-center();
+    }
+    .grid-nine {
+      width: $gridNineWidth;
+      height: $gridNineWidth;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+    }
+    .grid {
+      width: $cellWidth;
+      height: $cellWidth;
+      border: $cellBorderWidth solid transparent;
+      background-color: white(90);
+      background-clip: content-box;
+      transition: background 0.2s $out;
+      position: relative;
+      &-transparent {
+        background-color: transparent;
+      }
+      &-number {
+        @include flex-center();
+        position: relative;
+        .dot {
+          will-change: transform;
+          content: "";
+          position: absolute;
+          z-index: -1;
+          border-radius: 100%;
+          width: $cellWidth * 0.7;
+          height: $cellWidth * 0.7;
+          transform: scale(0) translateZ(0);
+          opacity: 0;
+          transition: all 0.2s $out;
+          transform-origin: center;
+        }
+        .number {
+          @include flex-center();
+          position: absolute;
+          z-index: 2;
+          width: 100%;
+          height: 100%;
+          font-size: 3.5vmin;
+          color: black(80);
+          font-weight: bold;
+          transition: color 0.4s $out;
+        }
+        .grid-small {
+          display: flex;
+          flex-wrap: wrap;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          z-index: -1;
+          transition: opacity 0.4s $out;
+          color: #fff;
+          b {
+            @include flex-center();
+            will-change: transform;
+            width: calc(100% / 3);
+            height: calc(100% / 3);
+            opacity: 0.5;
+            transform: scale(1);
+            transition: all 0.2s $out;
+            transform-origin: center;
+            &.candidate {
+              opacity: 1;
+            }
+          }
+        }
+        // 鼠标经过状态
+        &:not([data-freeze]):hover {
+          .dot {
+            transform: scale(1);
+            opacity: 1;
+          }
+          .number {
+            color: #fff;
+          }
+        }
+        // 激活状态
+        &.data-active {
+          .dot {
+            border-radius: 0;
+            transform: scale(1);
+            opacity: 1;
+            width: auto;
+            height: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: -$cellBorderWidth;
+            z-index: 9;
+          }
+          .grid-small {
+            opacity: 1;
+            z-index: 10;
+            b {
+              color: #fff !important;
+              &:hover {
+                opacity: 1;
+                transform: scale(1.3);
+                transform-origin: center;
+              }
+            }
+          }
+        }
+        // 有候选项
+        &.small-active {
+          .dot {
+            width: $cellWidth;
+            height: $cellWidth;
+          }
+          .grid-small {
+            // 有候选项状态
+            opacity: 1;
+            z-index: 1;
+            b:not(.candidate) {
+              opacity: 0;
+            }
+          }
+          &.data-active {
+            .grid-small {
+              z-index: 10;
+              b {
+                opacity: 0.5;
+                &.candidate {
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+        // 非法项
+        &[data-invalid] {
+          .number {
+            &::before {
+              @include ab-center();
+              content: "";
+              width: $cellWidth * 0.6;
+              height: $cellWidth * 0.6;
+              z-index: -1;
+              transition: all 0.2s $out;
+              border: 0.5vmin solid currentColor;
+              border-radius: 100%;
+            }
+          }
+          &:hover {
+            .number::before {
+              border-color: transparent;
+            }
+          }
+          &[data-freeze]:hover .number::before {
+            border-color: currentColor;
+          }
+        }
+      }
+    }
+    // 四角设置圆角
+    $radius: 2vmin;
+    .grid-nine:nth-child(1) .grid:nth-child(1) {
+      &,
+      & .data-active .dot {
+        border-top-left-radius: $radius;
+      }
+    }
+    .grid-nine:nth-child(3) .grid:nth-child(3) {
+      &,
+      & .data-active .dot {
+        border-top-right-radius: $radius;
+      }
+    }
+    .grid-nine:nth-child(7) .grid:nth-child(7) {
+      &,
+      & .data-active .dot {
+        border-bottom-left-radius: $radius;
+      }
+    }
+    .grid-nine:nth-child(9) .grid:nth-child(9) {
+      &,
+      & .data-active .dot {
+        border-bottom-right-radius: $radius;
+      }
+    }
+  }
+}
+#win {
+  @include fullscreen();
+  @include flex-center();
+  z-index: 2;
+  pointer-events: none;
+  background-color: black(30);
+  opacity: 0;
+  filter: blur(1vmin);
+  transition: all 1s;
+  .text {
+    @include flex-center();
+    span {
+      color: #fff;
+      font-size: 3vmin;
+    }
+    i {
+      display: inline-block;
+      width: 3vmin;
+      height: 6vmin;
+      position: relative;
+      transform: rotate(45deg);
+      transform-origin: 90% 50%;
+      margin-right: 3vmin;
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        border-radius: 0.5vmin;
+        background-color: #fff;
+      }
+      &::before {
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1vmin;
+        transition: width 0.2s ease-in 0.6s;
+      }
+      &::after {
+        right: 0;
+        bottom: 0;
+        height: 0;
+        width: 1vmin;
+        transition: height 0.3s cubic-bezier(1, 0.42, 1, 1) 0.8s;
+      }
+    }
+  }
+  &.show {
+    filter: blur(0);
+    opacity: 1;
+    pointer-events: auto;
+    .text {
+      i {
+        &::before {
+          width: 3vmin;
+        }
+        &::after {
+          height: 6vmin;
+        }
+      }
+    }
+    & + #game {
+      filter: blur(10px);
+    }
+  }
+}
+
+// 73 = 365 / 5
+@for $i from 1 through 73 {
+  #game[game-color="#{$i}"] {
+    background: linear-gradient(
+      calc(15deg * $i),
+      color($i),
+      lighten(color($i), 20%)
+    );
+    #board {
+      #grid {
+        .grid[data-light] {
+          background-color: lighten(color($i), 45%);
+        }
+      }
+      #number {
+        .grid-number {
+          .dot {
+            background: linear-gradient(
+              calc(15deg * $i),
+              color($i),
+              lighten(color($i), 20%)
+            );
+          }
+          &-input {
+            .number {
+              color: color($i);
+              &:hover {
+                color: #fff;
+              }
+            }
+          }
+          &.small-active {
+            .grid-small {
+              color: color($i);
+            }
+            &:hover {
+              .grid-small {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
