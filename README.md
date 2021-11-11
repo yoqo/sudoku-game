@@ -1,6 +1,6 @@
 # Sudoku-game
 
-sudoku web game
+[Play Online](http://www.3yak.com/sudoku/)
 
 ## Features
 
