@@ -10,6 +10,11 @@
 - Just click
 - Random color theme
 
+## Todo
+
+- Music, sound effect
+- Mobile experience
+
 ## Screenshots
 
 ![home](https://tva1.sinaimg.cn/large/0063X11aly8gwbii1nr5nj310r0po3z8.jpg)
