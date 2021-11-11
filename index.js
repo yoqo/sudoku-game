@@ -365,6 +365,7 @@ class Game {
   start(level) {
     this.switchPage("game");
     this.randomColor();
+    this.clearSmallNumber();
 
     if (level) {
       this.currentLevel = level;
@@ -406,6 +407,7 @@ class Game {
     this.sudoku = new Sudoku(difficulty, currentSudoku);
     this.setInvalidGrid();
     this.fillBoard();
+    this.clearSmallNumber();
   }
 
   /*----------------- ui -----------------*/
@@ -590,12 +592,28 @@ class Game {
     }
   }
   clearSmallNumber(gridNumber) {
-    let b = gridNumber.querySelectorAll("." + this.gridSmallCls + " b");
-    for (let i = 0; i < b.length; i++) {
-      b[i].classList.contains(this.candidateCls) &&
-        b[i].classList.remove(this.candidateCls);
-    }
-    this.toggleSmallNumber(gridNumber);
+    let all = gridNumber === undefined;
+
+    let clearAll = () => {
+      for (let i = 0; i < this.$gridNumbers.length; i++) {
+        let number = this.$gridNumbers[i].getAttribute("data-index");
+        let smallActive =
+          this.$gridNumbers[i].classList.contains("small-active");
+        if (smallActive !== null) {
+          clearOne(this.$gridNumbers[i]);
+        }
+      }
+    };
+    let clearOne = (gridNumber) => {
+      let b = gridNumber.querySelectorAll("." + this.gridSmallCls + " b");
+      for (let i = 0; i < b.length; i++) {
+        b[i].classList.contains(this.candidateCls) &&
+          b[i].classList.remove(this.candidateCls);
+      }
+      this.toggleSmallNumber(gridNumber);
+    };
+
+    all ? clearAll() : clearOne(gridNumber);
   }
   // Deactive all grids
   inactiveGridNumber() {
