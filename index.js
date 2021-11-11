@@ -392,6 +392,7 @@ class Game {
   }
   gameOver() {
     this.$win.classList.add("show");
+    localStorage.setItem("SUDOKU_COMPLETE", this.currentLevel);
     this.unlockNextLevel();
 
     setTimeout(() => {
@@ -661,7 +662,6 @@ class Game {
     this.levelTab(1);
     this.$levels = this.$levelList.querySelectorAll("b");
     this.unlockNextLevel();
-    // this.unlockLevel(true);
   }
   levelTab(n) {
     this.$level.setAttribute("data-tab", n);
@@ -680,8 +680,11 @@ class Game {
     }
   }
   unlockNextLevel() {
-    if (this.sudokuStorage.length < this.$levels.length) {
-      this.$levels[this.sudokuStorage.length].setAttribute(this.dataUnlock, "");
+    let SUDOKU_COMPLETE = localStorage.getItem("SUDOKU_COMPLETE") || 0;
+    for (let i = 0; i < Number(SUDOKU_COMPLETE) + 1; i++) {
+      if (this.$levels[i]) {
+        this.$levels[i].setAttribute(this.dataUnlock, "");
+      }
     }
   }
   levelToDifficulty(level) {
