@@ -399,7 +399,7 @@ class Game {
     setTimeout(() => {
       this.$win.classList.remove("show");
       this.switchPage("level");
-    }, 0);
+    }, 3000);
   }
   restart() {
     let difficulty = this.levelToDifficulty(this.currentLevel);
