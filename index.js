@@ -333,8 +333,8 @@ class Game {
     this.DELETE_DELAY = 2000;
 
     this.music = [
-      "./sound/ζ.m4a",
-      "./sound/η.m4a",
+      "./sound/Zeta.m4a",
+      "./sound/Eta.m4a",
       "./sound/Gymnopedies 1.m4a",
     ];
     this.soundEffect = {
