@@ -332,6 +332,18 @@ class Game {
 
     this.DELETE_DELAY = 2000;
 
+    this.music = [
+      "./sound/ζ.m4a",
+      "./sound/η.m4a",
+      "./sound/Gymnopedies 1.m4a",
+    ];
+    this.soundEffect = {
+      success: "./sound/success.mp3",
+      water: "./sound/water.mp3",
+      bubble: "./sound/bubble.mp3",
+    };
+    this.bgm = new Audio();
+
     this.init();
   }
 
@@ -360,12 +372,15 @@ class Game {
     this.switchPage("home");
   }
   level() {
+    this.audioFadeOut(this.bgm);
     this.switchPage("level");
   }
   start(level) {
     this.switchPage("game");
     this.randomColor();
     this.clearSmallNumber();
+
+    this.playBgm();
 
     if (level) {
       this.currentLevel = level;
@@ -395,10 +410,13 @@ class Game {
     this.$win.classList.add("show");
     localStorage.setItem("SUDOKU_COMPLETE", this.currentLevel);
     this.unlockNextLevel();
+    setTimeout(() => {
+      this.audioPlay(this.soundEffect.success);
+    }, 700);
 
     setTimeout(() => {
       this.$win.classList.remove("show");
-      this.switchPage("level");
+      this.level();
     }, 3000);
   }
   restart() {
@@ -553,6 +571,7 @@ class Game {
         $this.classList.contains(this.candidateCls)
           ? $this.classList.remove(this.candidateCls)
           : $this.classList.add(this.candidateCls);
+        this.audioPlay(this.soundEffect.bubble, 0.3);
         this.setNumber($gridNumber, 0);
       },
       true
@@ -574,6 +593,7 @@ class Game {
 
     $number.innerHTML = !number ? "" : number;
     if (number) {
+      this.audioPlay(this.soundEffect.water, 0.5);
       this.clearSmallNumber(gridNumber);
       gridNumber.classList.remove(this.dataActive);
       setTimeout(() => {
@@ -787,6 +807,29 @@ class Game {
       }
     }
     return a;
+  }
+
+  /*----------------- audio -----------------*/
+  playBgm() {
+    let bgm = this.music[Math.floor(Math.random() * this.music.length)];
+    this.bgm.src = bgm;
+    this.bgm.volume = 0.5;
+    this.bgm.play();
+  }
+  audioPlay(url, volume = 0.3) {
+    let audio = new Audio(url);
+    audio.volume = volume;
+    audio.play();
+  }
+  audioFadeOut(audio) {
+    setTimeout(() => {
+      if (audio.volume <= 0.5 / 17) {
+        audio.pause();
+      } else {
+        audio.volume -= 0.5 / 17;
+        this.audioFadeOut(audio);
+      }
+    }, 60);
   }
 }
 

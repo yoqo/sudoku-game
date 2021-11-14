@@ -2,10 +2,6 @@ $out: cubic-bezier(0.22, 0.61, 0.36, 1);
 $gridNineWidth: 26.3vmin;
 $cellWidth: calc($gridNineWidth / 3);
 $cellBorderWidth: 0.2vmin;
-$level-bg-1: linear-gradient(to right, #c9d6ff, #e2e2e2);
-$level-bg-2: linear-gradient(to right, #1c92d2, #f2fcfe);
-$level-bg-3: linear-gradient(to right, #ff9966, #ff5e62);
-$level-bg-4: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
 @function color($num) {
   @return hsl($num * 5, 40%, 40%);
 }
