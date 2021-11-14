@@ -9,10 +9,10 @@
 - Level system
 - Just click
 - Random color theme
-
-## Todo
-
 - Music, sound effect
+
+## Todos
+
 - Mobile experience
 
 ## Screenshots
