@@ -333,9 +333,9 @@ class Game {
     this.DELETE_DELAY = 2000;
 
     this.audioSrcMusic = [
-      "./sound/Zeta.m4a",
-      "./sound/Eta.m4a",
-      "./sound/Gymnopedies 1.m4a",
+      "./sound/bgm/Zeta.m4a",
+      "./sound/bgm/Eta.m4a",
+      "./sound/bgm/waterFrogs.mp3",
     ];
     this.audioSrcSound = {
       success: "./sound/success.mp3",
