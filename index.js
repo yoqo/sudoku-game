@@ -817,7 +817,8 @@ class Game {
     let bgm =
       this.audioSrcMusic[Math.floor(Math.random() * this.audioSrcMusic.length)];
     this.bgm.src = bgm;
-    this.bgm.volume = 0.5;
+    this.bgm.volume = 0.3;
+    this.bgm.loop = "loop";
     this.bgm.play();
   }
   audioPlay(url, volume = 0.3) {
