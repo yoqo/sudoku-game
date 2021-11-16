@@ -332,17 +332,18 @@ class Game {
 
     this.DELETE_DELAY = 2000;
 
-    this.music = [
+    this.audioSrcMusic = [
       "./sound/Zeta.m4a",
       "./sound/Eta.m4a",
       "./sound/Gymnopedies 1.m4a",
     ];
-    this.soundEffect = {
+    this.audioSrcSound = {
       success: "./sound/success.mp3",
       water: "./sound/water.mp3",
       bubble: "./sound/bubble.mp3",
     };
     this.bgm = new Audio();
+    this.audioFadeTimer = null;
 
     this.init();
   }
@@ -372,14 +373,16 @@ class Game {
     this.switchPage("home");
   }
   level() {
-    this.audioFadeOut(this.bgm);
     this.switchPage("level");
+
+    this.audioFadeOut(this.bgm);
   }
   start(level) {
     this.switchPage("game");
     this.randomColor();
     this.clearSmallNumber();
 
+    clearTimeout(this.audioFadeTimer);
     this.playBgm();
 
     if (level) {
@@ -411,7 +414,7 @@ class Game {
     localStorage.setItem("SUDOKU_COMPLETE", this.currentLevel);
     this.unlockNextLevel();
     setTimeout(() => {
-      this.audioPlay(this.soundEffect.success);
+      this.audioPlay(this.audioSrcSound.success);
     }, 700);
 
     setTimeout(() => {
@@ -571,7 +574,7 @@ class Game {
         $this.classList.contains(this.candidateCls)
           ? $this.classList.remove(this.candidateCls)
           : $this.classList.add(this.candidateCls);
-        this.audioPlay(this.soundEffect.bubble, 0.3);
+        this.audioPlay(this.audioSrcSound.bubble, 0.5);
         this.setNumber($gridNumber, 0);
       },
       true
@@ -593,7 +596,7 @@ class Game {
 
     $number.innerHTML = !number ? "" : number;
     if (number) {
-      this.audioPlay(this.soundEffect.water, 0.5);
+      this.audioPlay(this.audioSrcSound.water, 0.7);
       this.clearSmallNumber(gridNumber);
       gridNumber.classList.remove(this.dataActive);
       setTimeout(() => {
@@ -811,7 +814,8 @@ class Game {
 
   /*----------------- audio -----------------*/
   playBgm() {
-    let bgm = this.music[Math.floor(Math.random() * this.music.length)];
+    let bgm =
+      this.audioSrcMusic[Math.floor(Math.random() * this.audioSrcMusic.length)];
     this.bgm.src = bgm;
     this.bgm.volume = 0.5;
     this.bgm.play();
@@ -822,7 +826,7 @@ class Game {
     audio.play();
   }
   audioFadeOut(audio) {
-    setTimeout(() => {
+    this.audioFadeTimer = setTimeout(() => {
       if (audio.volume <= 0.5 / 17) {
         audio.pause();
       } else {
